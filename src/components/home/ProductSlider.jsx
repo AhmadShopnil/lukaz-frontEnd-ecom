@@ -6,23 +6,67 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import ProductCard from '../Cards/ProductCard';
 
-const categories = [
-  { name: 'Running Shoes', image: '/images/shoe/2.jpg' },
-  { name: 'Sneakers', image: '/images/shoe/shoe.png' },
-  { name: 'Boots', image: '/images/shoe/5.jpg' },
-  { name: 'Formal Shoes', image: '/images/shoe/3.jpg' },
-  { name: 'Casual Shoes', image: '/images/shoe/4.jpg' },
-  { name: 'Sandals', image: '/images/shoe/shoe_2.png' },
-  { name: 'Pants', image: '/images/catImg/pant.webp' },
-  { name: 'Shirts', image: '/images/catImg/shirt.webp' },
-  { name: 'Accessories', image: '/images/catImg/accessories.webp' },
-  { name: 'Panjabi', image: '/images/catImg/panjabi.webp' },
-  { name: 'T-Shirts', image: '/images/catImg/shirt.webp' },
-  { name: 'Jackets', image: '/images/catImg/jacket.png' },
+const products = [
+  {
+    id: 1,
+    name: "ASICS Superblast 2",
+    price: "199",
+    image: "/images/shoe/2.jpg",
+  },
+  {
+    id: 2,
+    name: "Nike Air Max 90",
+    price: "149",
+    image: "/images/pant/3.jpg",
+  },
+  {
+    id: 3,
+    name: "Adidas Ultraboost 22",
+    price: "180",
+    image: "/images/shoe/shoe.png"
+  },
+  {
+    id: 4,
+    name: "ASICS Superblast 2",
+    price: "199",
+    image: "/images/pant/2.jpg",
+  },
+  {
+    id: 5,
+    name: "Nike Air Max 90",
+    price: "149",
+    image: "/images/shoe/3.jpg",
+  },
+  {
+    id: 6,
+    name: "Adidas Ultraboost 22",
+    price: "180",
+    image: "/images/shoe/shoe.png"
+  },
+  {
+    id: 7,
+    name: "ASICS Superblast 2",
+    price: "199",
+    image: "/images/pant/6.jpg",
+  },
+  {
+    id: 8,
+    name: "Nike Air Max 90",
+    price: "149",
+    image: "/images/pant/5.jpg",
+  },
+  {
+    id: 9,
+    name: "Adidas Ultraboost 22",
+    price: "180",
+    image: "/images/pant/4.jpg"
+  },
 ];
 
-export default function ShopByCategoriesSlider() {
+
+export default function ProductSlider() {
   useEffect(() => {
     // Ensure swiper navigation elements are mounted
   }, []);
@@ -52,7 +96,7 @@ export default function ShopByCategoriesSlider() {
         breakpoints={{
           640: { slidesPerView: 2.2 },
           768: { slidesPerView: 3.2 },
-          1024: { slidesPerView: 5.2 },
+          1024: { slidesPerView: 6.2 },
         }}
         modules={[Navigation]}
         onInit={(swiper) => {
@@ -63,17 +107,9 @@ export default function ShopByCategoriesSlider() {
           swiper.navigation.update();
         }}
       >
-        {categories.map((cat, index) => (
+        {products.map((item, index) => (
           <SwiperSlide key={index}>
-            <div
-              className="h-[350px] rounded-md bg-cover bg-center relative overflow-hidden"
-              style={{ backgroundImage: `url(${cat.image})` }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <div className="absolute text-center bottom-7 left-4 right-4 text-white text-2xl font-bold">
-                {cat.name}
-              </div>
-            </div>
+           <ProductCard item={item}  />
           </SwiperSlide>
         ))}
       </Swiper>

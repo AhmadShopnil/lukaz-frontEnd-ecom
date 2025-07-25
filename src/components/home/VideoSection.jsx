@@ -9,7 +9,7 @@ const videoInfo = {
 
 export default function VideoSection() {
   return (
-    <section className="relative w-full h-[550px] overflow-hidden">
+    <section className="relative  w-full h-[550px] overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 w-[160%] h-[160%] -translate-x-1/2 -translate-y-1/2">
@@ -26,11 +26,11 @@ export default function VideoSection() {
       </div>
 
       {/* Content Overlay - aligned left bottom */}
-      <div className="relative z-20 h-full flex items-end px-6 pb-12 text-white">
+      <div className="relative z-20 h-full flex items-end px-6 pb-12 bottom-10 left-10 text-white">
         <div className="max-w-xl">
           <h1 className="text-3xl md:text-5xl font-bold mb-4">{videoInfo.title}</h1>
           <p className="text-lg md:text-xl mb-6">{videoInfo.subtitle}</p>
-          <button className="bg-white text-black font-semibold px-6 py-3 rounded-md hover:bg-gray-100 transition">
+          <button className="bg-white text-black font-semibold px-6 py-2.5 rounded-md hover:bg-gray-100 transition">
             {videoInfo.buttonText}
           </button>
         </div>

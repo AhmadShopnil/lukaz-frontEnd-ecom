@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 
-export default function ProductCard({ mainImage, hoverImage, category }) {
+export default function RoundOnHoverCard({ mainImage, hoverImage, category }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (

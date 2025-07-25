@@ -1,4 +1,5 @@
-import ProductCard from "../Cards/RoundOnHoverCard";
+import RoundOnHoverCard from "../Cards/RoundOnHoverCard";
+
 
 
 const products = [
@@ -27,7 +28,7 @@ export default function ProductSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
           {products.map((product, index) => (
-            <ProductCard
+            <RoundOnHoverCard
               key={index}
               mainImage={product.mainImage}
               hoverImage={product.hoverImage}
