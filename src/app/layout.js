@@ -1,17 +1,15 @@
-import { Geist, Geist_Mono } from "next/font/google";
+// app/layout.tsx
 import "./globals.css";
+import { DM_Sans } from "next/font/google";
 import Provider from "@/layout/Provider";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// ✅ Import DM Sans with variable
+const dmSans = DM_Sans({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-dm-sans", // Will be used in CSS
+  display: "swap",
 });
 
 export const metadata = {
@@ -21,17 +19,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        
+    <html lang="en" className={dmSans.variable}>
+      <body>
         <Provider>
-          <Header/>
-         {children}
-         <Footer/>
+          <Header />
+          {children}
+          <Footer />
         </Provider>
-        
       </body>
     </html>
   );

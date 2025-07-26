@@ -1,18 +1,11 @@
-// Updated Header component with Mega Menu on hamburger click
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import {
-  Search,
-  User,
-  Heart,
-  ShoppingBag,
-  Menu,
-  X,
-  ChevronRight,
-} from "lucide-react";
-import MenuToggle from "./MenuToggle";
-import MegaMenuTable from "./MegaMenuTable";
+"use client"
+import React, { useRef, useState } from 'react';
+import { OverlayPanel } from 'primereact/overlaypanel';
+import { Button } from 'primereact/button';
+import MegaMenuList from './MegaMenuList';
+import { ToggleButton } from 'primereact/togglebutton';
+import { ChevronRight, Menu, X } from 'lucide-react';
+import MegaMenuTable from './MegaMenuTable';
 
 const mainMenu = [
 //   {
@@ -902,138 +895,57 @@ const mainMenu = [
 ];
 
 
-export default function Header() {
- 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeMenu, setActiveMenu] = useState(null);
-  const menuIconRef = useRef(null)
-  const megamenuRef = useRef(null)
-
- const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev)
-  }
-
-  const handleClickOutside = event => {
-    if (
-      isMenuOpen &&
-      megamenuRef.current &&
-      !megamenuRef.current.contains(event.target) &&
-      !menuIconRef.current.contains(event.target)
-    ) {
-      setIsMenuOpen(false)
-    }
+export default function MenuToggle() {
   
-  }
+const [isMenuOpen, setIsMenuOpen] = useState(false);
+ const [searchQuery, setSearchQuery] = useState("");
+  const [activeMenu, setActiveMenu] = useState(null);
+  const op = useRef(null);
+const handleMenuClick=(e)=>{
+    op.current.toggle(e)
+    setIsMenuOpen(!isMenuOpen)
+}
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  })
-
-
-
-
-  return (
-    <div className=" overflow-hidden sticky top-0 z-50">
-      {/* Top white Header */}
-      <div className="bg-white text-sm">
-        <div className="max-w-7xl mx-auto px-4 flex justify-center items-center h-8">
-          <p className="text-center">Free delivery on orders over £50</p>
-        </div>
-      </div>
-
-      {/* Main Header */}
-      <header className="bg-black py-2 text-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between">
-            <div className="w-2/5 flex gap-6 md:gap-10">
-              {/* MegaMenu Icon */}
-              {/* <MenuToggle/> */}
-
-              <button  onClick={toggleMenu} ref={menuIconRef}>
+    return (
+        <div className=" ">
+              <button onClick={(e) =>handleMenuClick(e) }>
                 {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
               </button>
-              {/* Logo */}
-              <h1 className="text-2xl font-bold">Lukaz</h1>
+           
+            <OverlayPanel ref={op}>
+              
+              <div className="flex text-gray-4 mt-4 ">
+              
+            {/* Left Side Menu */}
+            <div className="flex flex-col gap-4">
+              {mainMenu.map((item, index) => (
+                <div
+                  key={index}
+                  onMouseEnter={() => setActiveMenu(index)}
+                  className={`px-4 flex  items-center justify-between ${
+                    activeMenu === index ? "text-black " : ""
+                  }`}
+                >
+                  <span>{item.label}</span>
+                <span>  {item.submenu && <ChevronRight className="h-4 w-4" />}</span>
+                </div>
+              ))}
             </div>
 
-            {/* Search + Icons */}
-            <div className="flex w-3/5 justify-between">
-              <div className="w-2/3 max-w-xl mx-4 hidden sm:block">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search for products, brands..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-4 py-1.5 bg-white border text-black border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-sports-orange focus:border-transparent"
-                  />
-                  <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-black" />
+            {/* Right Side Submenu */}
+            <div className="  ">
+              {mainMenu[activeMenu]?.submenu && (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  <MegaMenuTable  megaMenuData={mainMenu[activeMenu]?.submenu}/>
+                  {/* {mainMenu[activeMenu].map((item, idx) => (
+                   
+                  ))} */}
                 </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <button className="p-2">
-                  <User className="h-5 w-5" />
-                </button>
-                <button className="p-2">
-                  <Heart className="h-5 w-5" />
-                </button>
-                <button className="p-2 relative">
-                  <ShoppingBag className="h-5 w-5" />
-                  <span className="absolute -top-1 -right-1 bg-sports-orange text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    0
-                  </span>
-                </button>
-              </div>
+              ) }
             </div>
           </div>
+            </OverlayPanel>
         </div>
-
-        {/* Mega Menu Panel */}
-        
-      </header>
-        <div
-        ref={megamenuRef}
-       
-            className={`mx-4 bg-teal-50 shadow-md rounded-xl  py-5  transition-transform duration-300 ease-in-out ${isMenuOpen
-            ? 'transform translate-y-0 z-10 h-auto mt-2'
-            : 'transform -translate-y-full z-10 hidden'
-          }`}
-      >
-           <div className="flex text-gray-4 ">
-                     
-                   {/* Left Side Menu */}
-                   <div className="flex flex-col gap-4">
-                     {mainMenu.map((item, index) => (
-                       <div
-                         key={index}
-                         onMouseEnter={() => setActiveMenu(index)}
-                         className={`px-4 flex  items-center justify-between ${
-                           activeMenu === index ? "text-black " : ""
-                         }`}
-                       >
-                         <span>{item.label}</span>
-                       <span>  {item.submenu && <ChevronRight className="h-4 w-4" />}</span>
-                       </div>
-                     ))}
-                   </div>
-       
-                   {/* Right Side Submenu */}
-                   <div className="  ">
-                     {mainMenu[activeMenu]?.submenu && (
-                       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                         <MegaMenuTable  megaMenuData={mainMenu[activeMenu]?.submenu}/>
-                         {/* {mainMenu[activeMenu].map((item, idx) => (
-                          
-                         ))} */}
-                       </div>
-                     ) }
-                   </div>
-                 </div>
-      </div>
-    </div>
-  );
+    );
 }
+        

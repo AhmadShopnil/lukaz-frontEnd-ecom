@@ -30,7 +30,7 @@ export default function ShopByCategoriesSlider() {
   return (
     <div className="py-10 relative">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-3xl font-semibold">Shop by</h2>
+        <h2 className="text-3xl font-semibold">Shop by Categories</h2>
         {/* Navigation Buttons */}
         <div className="flex gap-2">
           <button className="swiper-button-prev-custom w-10 h-10   hover:text-teal-500 cursor-pointer flex items-center justify-center">
@@ -50,7 +50,7 @@ export default function ShopByCategoriesSlider() {
           prevEl: '.swiper-button-prev-custom',
         }}
         breakpoints={{
-          640: { slidesPerView: 2.2 },
+          640: { slidesPerView: 1.2 },
           768: { slidesPerView: 3.2 },
           1024: { slidesPerView: 5.2 },
         }}

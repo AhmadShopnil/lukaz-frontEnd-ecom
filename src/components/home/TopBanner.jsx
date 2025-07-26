@@ -38,7 +38,7 @@ export default function TopBanner() {
 
       {/* Hero banner */}
       <div className="bg-[#FE5B34] w-full text-center py-10 relative overflow-hidden">
-        <h1 className="text-white text-7xl font-extrabold  ">
+        <h1 className="text-white text-7xl font-extrabold ">
           SUMMER <br /> SALE
         </h1>
 

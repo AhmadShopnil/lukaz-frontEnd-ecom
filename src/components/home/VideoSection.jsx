@@ -28,7 +28,7 @@ export default function VideoSection() {
       {/* Content Overlay - aligned left bottom */}
       <div className="relative z-20 h-full flex items-end px-6 pb-12 bottom-10 left-10 text-white">
         <div className="max-w-xl">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">{videoInfo.title}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold mb-2">{videoInfo.title}</h1>
           <p className="text-lg md:text-xl mb-6">{videoInfo.subtitle}</p>
           <button className="bg-white text-black font-semibold px-6 py-2.5 rounded-md hover:bg-gray-100 transition">
             {videoInfo.buttonText}

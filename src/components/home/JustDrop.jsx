@@ -1,6 +1,13 @@
+"use client";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+
 import CardWithFullImage from "../shared/CardWithFullImage";
 
-  const products = [
+const products = [
   { name: 'Gray Pant', image: '/images/pant/2.jpg' },
   { name: 'Jins Pant', image: '/images/pant/5.jpg' },
   { name: 'Black Pant', image: '/images/pant/3.jpg' },
@@ -16,18 +23,32 @@ import CardWithFullImage from "../shared/CardWithFullImage";
 ];
 
 export default function JustDroppedSection() {
-
   return (
-    <section className="py-12 ">
-      <h1 className="font-semibold text-3xl mb-3">
-Just Dropped</h1>
-  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-     {
-    products?.slice(0,3).map((product,i)=>(
-      <CardWithFullImage key={i} item={product}/>
-    ))
-   }
-  </div>
+    <section className="py-6">
+      <h1 className="font-semibold text-3xl mb-3">Just Dropped</h1>
+
+      {/* Mobile View: Swiper */}
+      <div className="block md:hidden">
+        <Swiper
+          spaceBetween={10}
+          pagination={{ clickable: true }}
+          modules={[Pagination]}
+          slidesPerView={1.2}
+        >
+          {products.slice(0, 6).map((product, i) => (
+            <SwiperSlide key={i}>
+              <CardWithFullImage item={product} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      {/* Desktop View: Grid */}
+      <div className="hidden md:grid grid-cols-2 md:grid-cols-3 gap-3">
+        {products.slice(0, 3).map((product, i) => (
+          <CardWithFullImage key={i} item={product} />
+        ))}
+      </div>
     </section>
-  )
+  );
 }
